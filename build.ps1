@@ -12,10 +12,10 @@ dotnet msbuild -v:m -restore -t:Build -p:Configuration=Release -p:TargetFramewor
 if ($LASTEXITCODE) { exit $LASTEXITCODE }
 Remove-Item Release\net472\*.pdb, Release\net472\*.xml, Release\net472\Test.Rename.*
 
-dotnet publish -c Release -f netcoreapp2.1 -o publish-netcoreapp2.1 de4dot
-if ($LASTEXITCODE) { exit $LASTEXITCODE }
-Remove-Item publish-netcoreapp2.1\*.pdb, publish-netcoreapp2.1\*.xml
+# dotnet publish -c Release -f netcoreapp2.1 -o publish-netcoreapp2.1 de4dot
+# if ($LASTEXITCODE) { exit $LASTEXITCODE }
+# Remove-Item publish-netcoreapp2.1\*.pdb, publish-netcoreapp2.1\*.xml
 
-dotnet publish -c Release -f netcoreapp3.1 -o publish-netcoreapp3.1 de4dot
+dotnet publish -c Release -f net6.0 -o publish-net6.0 de4dot
 if ($LASTEXITCODE) { exit $LASTEXITCODE }
-Remove-Item publish-netcoreapp3.1\*.pdb, publish-netcoreapp3.1\*.xml
+Remove-Item publish-net6.0\*.pdb, publish-net6.0\*.xml
