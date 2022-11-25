@@ -17,8 +17,8 @@
     along with de4dot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace System.Runtime.ExceptionServices {
-	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-	public class HandleProcessCorruptedStateExceptionsAttribute : Attribute {
-	}
-}
+// namespace System.Runtime.ExceptionServices {
+// 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+// 	public class HandleProcessCorruptedStateExceptionsAttribute : Attribute {
+// 	}
+// }

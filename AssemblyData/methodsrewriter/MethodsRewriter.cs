@@ -202,7 +202,7 @@ namespace AssemblyData.methodsrewriter {
 				Update(block, newMethodInfo);
 
 			IList<Instruction> allInstructions;
-			IList<ExceptionHandler> allExceptionHandlers;
+			IList<dnlib.DotNet.Emit.ExceptionHandler> allExceptionHandlers;
 			blocks.GetCode(out allInstructions, out allExceptionHandlers);
 			newMethodInfo.delegateInstance = codeGenerator.Generate(allInstructions, allExceptionHandlers);
 		}

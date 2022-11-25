@@ -58,7 +58,7 @@ namespace AssemblyData.methodsrewriter {
 		IMethodsRewriter methodsRewriter;
 		string methodName;
 		IList<Instruction> allInstructions;
-		IList<ExceptionHandler> allExceptionHandlers;
+		IList<dnlib.DotNet.Emit.ExceptionHandler> allExceptionHandlers;
 		ILGenerator ilg;
 		Type methodReturnType;
 		Type[] methodParameters;
@@ -70,7 +70,7 @@ namespace AssemblyData.methodsrewriter {
 		List<LocalBuilder> locals;
 		List<Label> labels;
 		Dictionary<Instruction, int> instrToIndex;
-		Stack<ExceptionHandler> exceptionHandlersStack;
+		Stack<dnlib.DotNet.Emit.ExceptionHandler> exceptionHandlersStack;
 
 		public Type DelegateType {
 			get { return delegateType; }
@@ -88,7 +88,7 @@ namespace AssemblyData.methodsrewriter {
 			delegateType = Utils.GetDelegateType(methodReturnType, methodParameters);
 		}
 
-		public Delegate Generate(IList<Instruction> allInstructions, IList<ExceptionHandler> allExceptionHandlers) {
+		public Delegate Generate(IList<Instruction> allInstructions, IList<dnlib.DotNet.Emit.ExceptionHandler> allExceptionHandlers) {
 			this.allInstructions = allInstructions;
 			this.allExceptionHandlers = allExceptionHandlers;
 
@@ -100,7 +100,7 @@ namespace AssemblyData.methodsrewriter {
 			InitLocals();
 			InitLabels();
 
-			exceptionHandlersStack = new Stack<ExceptionHandler>();
+			exceptionHandlersStack = new Stack<dnlib.DotNet.Emit.ExceptionHandler>();
 			for (int i = 0; i < allInstructions.Count; i++) {
 				UpdateExceptionHandlers(i);
 				var instr = allInstructions[i];
@@ -150,7 +150,7 @@ namespace AssemblyData.methodsrewriter {
 		}
 
 		bool AddTryStart(Instruction instr) {
-			var list = new List<ExceptionHandler>();
+			var list = new List<dnlib.DotNet.Emit.ExceptionHandler>();
 			foreach (var ex in allExceptionHandlers) {
 				if (ex.TryStart == instr)
 					list.Add(ex);
@@ -166,7 +166,7 @@ namespace AssemblyData.methodsrewriter {
 			return list.Count > 0;
 		}
 
-		static bool IsSameTryBlock(ExceptionHandler ex1, ExceptionHandler ex2) {
+		static bool IsSameTryBlock(dnlib.DotNet.Emit.ExceptionHandler ex1, dnlib.DotNet.Emit.ExceptionHandler ex2) {
 			return ex1.TryStart == ex2.TryStart && ex1.TryEnd == ex2.TryEnd;
 		}
 

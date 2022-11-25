@@ -38,7 +38,7 @@ namespace de4dot.code.AssemblyClient {
 			appDomain = AppDomain.CreateDomain(Utils.RandomName(15, 20));
 			thread = new Thread(new ThreadStart(() => {
 				try {
-					appDomain.ExecuteAssembly(filename, null, new string[] {
+					appDomain.ExecuteAssembly(filename, new string[] {
 						((int)serviceType).ToString(), ipcName, ipcUri
 					});
 				}
